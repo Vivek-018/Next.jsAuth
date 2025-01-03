@@ -28,8 +28,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: "Password reset email sent successfully",
     });
-  } catch (error: any) {
-    console.error("Error in forgot password:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    // console.error("Error in forgot password:", error);
+    // return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof Error) {
+      console.error("Error in forgot password:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // If it's not an instance of Error, return a generic error message
+    console.error("Unexpected error:", error);
+    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+    
   }
 }

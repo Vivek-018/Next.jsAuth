@@ -52,7 +52,15 @@ export async function POST(request:NextRequest){
        return response;
 
     } catch (error:any) {
-        return NextResponse.json({error:error.message},{status:500})
+        // return NextResponse.json({error:error.message},{status:500})
+        // Check if the error is an instance of Error before accessing properties
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
+
+        // If it's not an instance of Error, return a generic error message
+        return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+
     }
 }
 
