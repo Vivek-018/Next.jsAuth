@@ -1,22 +1,9 @@
 
-// export default async function Profile({ params }: { params: { id: string } }) {
-//     // Wait for params to be available
-//     const { id } = await params;
-  
-//     return (
-//       <div>
-//         <h1>userprofile</h1>
-//         <hr />
-//         <p className="text-4xl">Profile page {id}</p>
-//       </div>
-//     );
-//   }
-
 "use client";
-// ui code by the ai 
-export default async function Profile({ params }: { params: { id: string } }) {
-  // Wait for params to be available
-  const { id } = await params;
+
+export default  function Profile({ params }: { params: { id: string } }) {
+
+  const { id } =  params;
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 py-6 flex flex-col justify-center sm:py-12">

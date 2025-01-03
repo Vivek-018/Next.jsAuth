@@ -1,15 +1,3 @@
-// import Image from "next/image";
-
-// export default function Home() {
-//   return (
-//    <div>Home</div>
-//   );
-// }
-
-
-
-import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -24,20 +12,7 @@ export default function Home() {
             <p className="text-xl text-gray-600 mb-8">
               A secure, modern authentication system built with cutting-edge technologies
             </p>
-            {/* <div className="flex gap-4 justify-center">
-              <Link 
-                href="/login"
-                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Login
-              </Link>
-              <Link 
-                href="/signup"
-                className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-colors"
-              >
-                Sign Up
-              </Link>
-            </div> */}
+          
           </div>
 
           {/* Features Section */}
@@ -62,45 +37,25 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-2 relative">
-                  {/* <Image
-                    src="/api/placeholder/64/64"
-                    alt="Next.js"
-                    fill
-                    className="object-contain"
-                  /> */}
+                 
                 </div>
                 <p className="font-medium text-gray-600">Next.js</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-2 relative">
-                  {/* <Image
-                    src="/api/placeholder/64/64"
-                    alt="MongoDB"
-                    fill
-                    className="object-contain"
-                  /> */}
+                 
                 </div>
                 <p className="font-medium text-gray-600">MongoDB</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-2 relative">
-                  {/* <Image
-                    src="/api/placeholder/64/64"
-                    alt="Tailwind CSS"
-                    fill
-                    className="object-contain"
-                  /> */}
+                 
                 </div>
                 <p className="font-medium text-gray-600">Tailwind CSS</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-2 relative">
-                  {/* <Image
-                    src="/api/placeholder/64/64"
-                    alt="TypeScript"
-                    fill
-                    className="object-contain"
-                  /> */}
+                
                 </div>
                 <p className="font-medium text-gray-600">TypeScript</p>
               </div>

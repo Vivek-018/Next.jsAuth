@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
+import axios,{ AxiosError} from "axios";
+import toast from "react-hot-toast";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -12,12 +13,19 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setMessage("");
     setError("");
-
+   
     try {
       const response = await axios.post("/api/users/forgotpassword", { email });
       setMessage(response.data.message);
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Something went wrong");
+      setEmail("");
+      toast.success("Password reset link sent to your email");
+    } catch (err: unknown) {
+      // setError(err.response?.data?.error || "Something went wrong");
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.error || "Something went wrong");
+      } else {
+        setError("Something went wrong");
+      }
     }
   };
 
@@ -28,7 +36,7 @@ export default function ForgotPasswordPage() {
         <input
           type="email"
           placeholder="Enter your email"
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-800 rounded text-black"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

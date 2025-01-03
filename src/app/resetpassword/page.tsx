@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -34,8 +35,14 @@ export default function ResetPasswordPage() {
       });
       setMessage(response.data.message);
       router.push("/login");
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Something went wrong");
+      toast.success("Password reset successful");
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+          setError(err.response?.data?.error || "Something went wrong");
+        } else {
+          setError("Something went wrong");
+        }
+
     }
   };
 
@@ -46,7 +53,7 @@ export default function ResetPasswordPage() {
         <input
           type="password"
           placeholder="Enter new password"
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-800 rounded text-black"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -54,7 +61,7 @@ export default function ResetPasswordPage() {
         <input
           type="password"
           placeholder="Confirm new password"
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-800 rounded text-black"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required

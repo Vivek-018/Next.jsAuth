@@ -48,10 +48,19 @@ export async function POST(request:NextRequest){
     })
 
 
-    } catch (error:any) {
-        return NextResponse.json({
-            error:error.message,
-        },{status:500})
+    } catch (error:unknown) {
+        // return NextResponse.json({
+        //     error:error.message,
+        // },{status:500})
+        if (error instanceof Error) {
+          return NextResponse.json({ error: error.message }, { status: 500 });
+       }
+    
+      // If it's not an instance of Error, return a generic error message
+      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+    
+
+
     }
 }
 

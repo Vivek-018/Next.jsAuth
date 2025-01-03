@@ -51,7 +51,7 @@ export async function POST(request:NextRequest){
 
        return response;
 
-    } catch (error:any) {
+    } catch (error:unknown) {
         // return NextResponse.json({error:error.message},{status:500})
         // Check if the error is an instance of Error before accessing properties
         if (error instanceof Error) {

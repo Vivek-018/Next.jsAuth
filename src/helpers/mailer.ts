@@ -2,9 +2,16 @@ import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+
+interface SendEmailArgs {
+  email: string;
+  emailType: "VERIFY" | "RESET"; 
+  userId: string; 
+}
+
+export const sendEmail = async ({ email, emailType, userId }: SendEmailArgs) => {
   try {
-    // create a hashed token
+   
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
     if (emailType === "VERIFY") {
@@ -19,35 +26,18 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       });
     }
 
-    // Looking to send emails in production? Check out our Email API/SMTP product!
-    var transport = nodemailer.createTransport({
+    // Use const instead of var
+    const transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
         user: process.env.MAILTRAP_USER,
         pass: process.env.MAILTRAP_PASS,
-        // TODO:add there to .env file
+       
       },
     });
 
-    // const mailOptions = {
-    //   from: "vr7064300@gmai.com",
-    //   to: email,
-    //   subject:
-    //     emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-    //   html: `<p>Click <a href="${
-    //     process.env.DOMAIN
-    //   }/verifyemail?token=${hashedToken}">here</a> to ${
-    //     emailType === "VERIFY" ? "verify your email" : "reset your password"
-    //   }
-
-    //  or copy and paste the link below in your broswer. <br> ${
-    //    process.env.DOMAIN
-    //  }/verifyemail?token=${hashedToken}
-    //   </p>`,
-    // };
-
-    // Prepare email content
+    // Email content based on type
     const emailContent =
       emailType === "VERIFY"
         ? {
@@ -71,9 +61,12 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       html: emailContent.html,
     };
 
-    const mailresponse = await transport.sendMail(mailOptions);
-    return mailresponse;
-  } catch (error: any) {
-    throw new Error(error.message);
+    const mailResponse = await transport.sendMail(mailOptions);
+    return mailResponse;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("An unknown error occurred while sending email.");
   }
 };
