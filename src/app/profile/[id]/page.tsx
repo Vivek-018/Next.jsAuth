@@ -43,7 +43,7 @@
 // }
 
 // src/app/profile/[id]/page.tsx
-import { useRouter } from 'next/navigation';
+
 
 interface ProfileProps {
   params: { id: string };
