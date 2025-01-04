@@ -42,11 +42,14 @@
 //   );
 // }
 
-"use client";
+// src/app/profile/[id]/page.tsx
+import { useRouter } from 'next/navigation';
 
+interface ProfileProps {
+  params: { id: string };
+}
 
-
-export default function Profile({ params }: { params: { id: string } }) {
+const Profile = ({ params }: ProfileProps) => {
   const { id } = params;
 
   return (
@@ -64,9 +67,7 @@ export default function Profile({ params }: { params: { id: string } }) {
 
                 <div className="bg-gray-50 rounded-lg p-6 shadow-sm">
                   <h2 className="text-sm font-medium text-gray-500 mb-2">USER ID</h2>
-                  <p className="text-lg font-medium text-gray-900 break-all">
-                    {id}
-                  </p>
+                  <p className="text-lg font-medium text-gray-900 break-all">{id}</p>
                 </div>
 
                 <div className="mt-8 text-center">
@@ -84,4 +85,6 @@ export default function Profile({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
-}
+};
+
+export default Profile;
