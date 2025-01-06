@@ -112,16 +112,9 @@
 // }
 
 
+// import { Page } from 'next';
 
-import { NextPage } from 'next';
-
-interface UserProfileProps {
-    params: {
-        id: string; // Assuming `id` is a string
-    };
-}
-
-const UserProfile: NextPage<UserProfileProps> = ({ params }) => {
+const UserProfile = ({ params }: { params: { id: string } }) => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <h1 className='text-4xl font-bold'>Profile</h1>
@@ -135,4 +128,5 @@ const UserProfile: NextPage<UserProfileProps> = ({ params }) => {
 };
 
 export default UserProfile;
+
 
